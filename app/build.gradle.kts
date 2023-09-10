@@ -33,13 +33,21 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    implementation(Deps.coreKtx)
+    implementation(Deps.appCompat)
+    implementation(Deps.materialDesign)
+
+    implementation(Deps.navFragmentKtx)
+    implementation(Deps.navUiKtx)
+
+    testImplementation(Deps.jUnit)
+    androidTestImplementation(Deps.jUnitExt)
 }
