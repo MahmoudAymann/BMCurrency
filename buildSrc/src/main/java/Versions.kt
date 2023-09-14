@@ -8,6 +8,15 @@ object Versions {
     const val material = "1.9.0"
     const val navigation = "2.7.2"
 
+    const val hilt = "2.47"
+
+    const val moshi = "1.14.0"
+    const val moshiRetrofitConverter = "2.4.0"
+
+    const val retrofit = "2.9.0"
+    const val okhttpLoggingInterceptor = "4.11.0"
+
+
     const val jUnit = "4.13.2"
     const val jUnitExt = "1.1.5"
 }

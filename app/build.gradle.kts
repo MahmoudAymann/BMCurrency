@@ -1,16 +1,21 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("androidx.navigation.safeargs.kotlin")
+    id("com.google.devtools.ksp")
+    id("kotlin-parcelize")
+    id("com.google.dagger.hilt.android")
+    kotlin("plugin.serialization")
 }
 
 android {
     namespace = "com.bm.currency"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.bm.currency"
         minSdk = 26
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -45,8 +50,25 @@ dependencies {
     implementation(Deps.appCompat)
     implementation(Deps.materialDesign)
 
+    //Navigation
     implementation(Deps.navFragmentKtx)
     implementation(Deps.navUiKtx)
+
+    //Hilt
+    implementation(Deps.hiltAndroid)
+    ksp(Deps.hiltCompiler)
+
+    //Retrofit
+    implementation(Deps.retrofit)
+    implementation(Deps.okhttpLoggingInterceptor)
+//    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+
+    //Moshi
+    implementation(Deps.moshi)
+    implementation(Deps.moshiKotlin)
+    ksp(Deps.moshiKotlinCodegen)
+    implementation(Deps.moshiRetrofitConverter)
+
 
     testImplementation(Deps.jUnit)
     androidTestImplementation(Deps.jUnitExt)

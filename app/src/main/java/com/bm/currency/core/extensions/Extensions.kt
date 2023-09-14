@@ -1,8 +1,10 @@
 package com.bm.currency.core.extensions
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.annotation.NavigationRes
 import androidx.appcompat.app.AppCompatActivity
@@ -50,4 +52,7 @@ fun Fragment.initNavController(
         navController.setGraph(navGraph, bundle)
     }
     return navController
+}
+fun Context.showToast(message: String?) = message?.let {
+    Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
 }
