@@ -11,6 +11,7 @@ plugins {
 android {
     namespace = "com.bm.currency"
     compileSdk = 34
+    val getProperty = { k: String -> "\"${project.properties[k]}\"" }
 
     defaultConfig {
         applicationId = "com.bm.currency"
@@ -20,6 +21,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "FixerApiKey", getProperty("FixerApiKey"))
     }
 
     buildTypes {
@@ -41,6 +43,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
