@@ -11,7 +11,8 @@ plugins {
 android {
     namespace = "com.bm.currency"
     compileSdk = 34
-    val getProperty = { k: String -> "\"${project.properties[k]}\"" }
+    val getProperty = { k: String, v: String -> "\"${project.properties["$k.$v"]}\"" }
+    val getFixerProperty = { v: String -> getProperty("Fixer", v) }
 
     defaultConfig {
         applicationId = "com.bm.currency"
@@ -21,15 +22,15 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "FixerApiKey", getProperty("FixerApiKey"))
+        buildConfigField("String", "FixerApiKey", getFixerProperty("ApiKey"))
+        buildConfigField("String", "FixerBaseUrl", getFixerProperty("BaseUrl"))
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -64,7 +65,6 @@ dependencies {
     //Retrofit
     implementation(Deps.retrofit)
     implementation(Deps.okhttpLoggingInterceptor)
-//    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
     //Moshi
     implementation(Deps.moshi)
