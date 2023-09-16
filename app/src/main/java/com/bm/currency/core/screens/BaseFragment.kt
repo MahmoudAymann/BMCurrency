@@ -5,16 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IdRes
+import androidx.annotation.StringRes
 import androidx.core.os.bundleOf
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
-import com.bm.currency.R
 import com.bm.currency.core.extensions.InflateFragment
 import com.bm.currency.core.extensions.showToast
-import com.bm.currency.features.activity.MainActivity
 
 open class BaseFragment<VB : ViewBinding>(
     private val inflate: InflateFragment<VB>
@@ -43,6 +40,10 @@ open class BaseFragment<VB : ViewBinding>(
 
     fun showToast(message: String?) = message?.let {
         requireContext().showToast(it)
+    }
+
+    fun showToast(@StringRes messageRes: Int?) = messageRes?.let {
+        showToast(getString(it))
     }
 
     fun getStringFromArgs(key: String, defaultValue: String? = null): String? {

@@ -6,13 +6,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.bm.currency.core.extensions.InflateFragment
 import com.bm.currency.core.viewmodel.BaseStateViewModel
+import com.bm.currency.core.viewmodel.UiAction
 import com.bm.currency.core.viewmodel.UiState
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-abstract class BaseStateFragment<B : ViewBinding, State : UiState>(inflate: InflateFragment<B>) :
+abstract class BaseStateFragment<B : ViewBinding, State : UiState, Action:UiAction>(inflate: InflateFragment<B>) :
     BaseFragment<B>(inflate) {
 
-    abstract val viewModel: BaseStateViewModel<State>
+    abstract val viewModel: BaseStateViewModel<State,Action>
     abstract fun onCollectUiState(uiState: State)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,10 +24,14 @@ abstract class BaseStateFragment<B : ViewBinding, State : UiState>(inflate: Infl
 
     private fun collectUiState() {
         lifecycleScope.launch {
-            viewModel.uiState.collect { uiState ->
+            viewModel.uiState.collectLatest { uiState ->
                 onCollectUiState(uiState)
             }
         }
+    }
+
+    protected fun setAction(action: Action){
+        viewModel.setAction(action)
     }
 
 }

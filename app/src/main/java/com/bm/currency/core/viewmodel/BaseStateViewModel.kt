@@ -6,7 +6,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-open class BaseStateViewModel<State : UiState>(uiState: State) : BaseViewModel() {
+abstract class BaseStateViewModel<State : UiState, Action : UiAction>(uiState: State) :
+    BaseViewModel() {
 
     private val _uiState = MutableStateFlow(uiState)
     val uiState: StateFlow<State> = _uiState.asStateFlow()
@@ -17,5 +18,10 @@ open class BaseStateViewModel<State : UiState>(uiState: State) : BaseViewModel()
         }
     }
 
+    protected abstract fun onActionReceived(action: Action)
+
+    fun setAction(action: Action){
+        onActionReceived(action)
+    }
 
 }
