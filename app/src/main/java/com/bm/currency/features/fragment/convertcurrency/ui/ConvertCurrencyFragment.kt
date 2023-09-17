@@ -8,6 +8,7 @@ import com.bm.currency.core.extensions.asAutoCompleteSetListToAdapter
 import com.bm.currency.core.extensions.setDefaultTextWhenUnFocused
 import com.bm.currency.core.screens.BaseStateFragment
 import com.bm.currency.databinding.FragmentConvertCurrencyBinding
+import com.bm.currency.features.dialog.progressdialog.ProgressDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -30,6 +31,7 @@ class ConvertCurrencyFragment :
     private val etFromCurrency by lazy { binding.tilBaseCurrency.editText!! }
     private val etToCurrency by lazy { binding.tilConvertToCurrency.editText!! }
     private val etAmount by lazy { binding.tilAmount.editText!! }
+    private val progressDialog by lazy { ProgressDialog(requireActivity()) }
 
     companion object {
         private const val FROM_CURRENCY_BUNDLE_KEY = "fromCurrency"
@@ -135,6 +137,7 @@ class ConvertCurrencyFragment :
             binding.tilOutput.editText?.setText(uiState.amount.toString())
         if (uiState.errorMessageRes != null) showToast(uiState.errorMessageRes)
         if (uiState.errorMessage != null) showToast(uiState.errorMessage)
+        progressDialog.showProgressDialog(uiState.loading)
     }
 
 }

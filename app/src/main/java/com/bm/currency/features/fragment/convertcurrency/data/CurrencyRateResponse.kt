@@ -1,5 +1,6 @@
 package com.bm.currency.features.fragment.convertcurrency.data
 
+import com.bm.currency.core.network.BaseResponse
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -17,7 +18,7 @@ data class CurrencyRateResponse(
 
     @Json(name = "base")
     val base: String? = null
-)
+) : BaseResponse()
 
 @JsonClass(generateAdapter = true)
 data class Rates(

@@ -11,11 +11,11 @@ import com.bm.currency.R
  * Created by Mahmoud Ayman on 15/09/2023.
  * Email: mahmoud_aymann@outlook.com.
  */
-class ProgressDialog(private val activity: Activity, private val dismissible:Boolean = false) {
+class ProgressDialog(private val activity: Activity, private val dismissible: Boolean = false) {
 
     private lateinit var dialog: Dialog
 
-    fun showDialog() {
+    private fun showDialog() {
         if (!isShown()) {
             dialog = Dialog(activity)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -31,9 +31,16 @@ class ProgressDialog(private val activity: Activity, private val dismissible:Boo
             dialog.dismiss()
     }
 
-    fun hideDialog() {
+    private fun hideDialog() {
         if (isShown())
             dialog.dismiss()
+    }
+
+    fun showProgressDialog(show: Boolean) {
+        if (show)
+            showDialog()
+        else
+            hideDialog()
     }
 
     private fun isShown(): Boolean = this::dialog.isInitialized && dialog.isShowing

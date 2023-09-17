@@ -11,5 +11,6 @@ data class ConvertCurrencyState(
     val amount: Float,
     val rate:Float=0f,
     val errorMessage: String? = null,
-    @StringRes val errorMessageRes: Int?=null
+    @StringRes val errorMessageRes: Int?=null,
+    val loading: Boolean=false
 ) : UiState
