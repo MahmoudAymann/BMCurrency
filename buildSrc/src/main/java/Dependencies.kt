@@ -28,7 +28,13 @@ object Deps {
     val retrofit by lazy { "com.squareup.retrofit2:retrofit:${Versions.retrofit}" }
     val okhttpLoggingInterceptor by lazy { "com.squareup.okhttp3:logging-interceptor:${Versions.okhttpLoggingInterceptor}" }
 
+    //Coroutines
+    val kotlinCoroutines by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinCoroutines}" }
+    val kotlinCoroutinesTest by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinCoroutinesTest}" }
+
     //UnitTest
     val jUnit by lazy { "junit:junit:${Versions.jUnit}" }
     val jUnitExt by lazy { "androidx.test.ext:junit:${Versions.jUnitExt}" }
+    val mockitoCore by lazy { "org.mockito:mockito-core:${Versions.mockitoCore}" }
+    val coreTesting by lazy { "androidx.arch.core:core-testing:${Versions.testingCore}" }
 }

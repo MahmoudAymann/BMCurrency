@@ -46,6 +46,9 @@ android {
         viewBinding = true
         buildConfig = true
     }
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -71,8 +74,13 @@ dependencies {
     implementation(Deps.moshiKotlin)
     ksp(Deps.moshiKotlinCodegen)
     implementation(Deps.moshiRetrofitConverter)
+    implementation(Deps.kotlinCoroutines)
+    implementation(Deps.kotlinCoroutinesTest)
 
 
     testImplementation(Deps.jUnit)
+    testImplementation(Deps.mockitoCore)
+    testImplementation(Deps.coreTesting)
     androidTestImplementation(Deps.jUnitExt)
+    testImplementation("org.json:json:20210307")
 }

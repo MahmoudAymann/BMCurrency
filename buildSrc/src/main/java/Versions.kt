@@ -19,4 +19,9 @@ object Versions {
 
     const val jUnit = "4.13.2"
     const val jUnitExt = "1.1.5"
+    const val mockitoCore = "3.11.2"
+    const val testingCore = "2.1.0"
+
+    const val kotlinCoroutines = "1.3.9"
+    const val kotlinCoroutinesTest = "1.6.0"
 }
