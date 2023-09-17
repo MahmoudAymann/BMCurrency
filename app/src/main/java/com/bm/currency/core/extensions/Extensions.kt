@@ -16,6 +16,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import org.json.JSONObject
 
 /**
  * Created by Mahmoud Ayman on 10/09/2023.
@@ -101,4 +105,27 @@ fun EditText?.asAutoCompleteSetListToAdapter(
         val selectedItem = parent.getItemAtPosition(position) as String
         onItemSelected.invoke(selectedItem)
     }
+}
+inline fun <reified T> createJsonAdapter(): JsonAdapter<T> {
+    val moshi: Moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory())
+        .build()
+    return moshi.adapter(T::class.java)
+}
+inline fun <reified T> T?.toHashMapParams(): HashMap<String, String?>? {
+    if (this == null) return null
+    val params by lazy<HashMap<String, String?>> { HashMap() }
+    try {
+        val jsonAdapter = createJsonAdapter<T>()
+
+        JSONObject(jsonAdapter.toJson(this)).let {
+            if (it.names() != null)
+                for (i in 0 until it.names()!!.length()) {
+                    params[it.names()!!.getString(i)] =
+                        it[it.names()!!.getString(i)].toString() + ""
+                }
+        }
+    } catch (e: Exception) {
+        println(e)
+    }
+    return if (params.isEmpty()) null else params
 }
